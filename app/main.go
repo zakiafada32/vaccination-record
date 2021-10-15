@@ -19,6 +19,7 @@ func init() {
 
 func main() {
 	e := echo.New()
+
 	// Start server
 	e.Logger.SetLevel(log.INFO)
 	e.Use(middleware.Logger())
