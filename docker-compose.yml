@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - mynet
+    environment:
+      - MYSQL_USER=${SQL_USER}
+      - MYSQL_PASSWORD=${SQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${SQL_PASSWORD}
+      - MYSQL_DATABASE=${SQL_DBNAME}
+    ports:
+      - 3306:3306
+    volumes:
+      - vaccine-db:/var/lib/mysql
+
+volumes:
+  vaccine-db:
+
+networks:
+  mynet:
+    driver: bridge
