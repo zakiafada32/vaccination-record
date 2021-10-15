@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -11,6 +12,11 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
+
+	"github.com/zakiafada32/vaccine/app/config"
+	userService "github.com/zakiafada32/vaccine/business/user"
+	"github.com/zakiafada32/vaccine/modules"
+	userRepository "github.com/zakiafada32/vaccine/modules/user"
 )
 
 func init() {
@@ -18,6 +24,14 @@ func init() {
 }
 
 func main() {
+	db := config.ConnectMySQL()
+	modules.Migrate(db)
+
+	userRepository := userRepository.NewUserRepository(db)
+	userService := userService.NewUserService(userRepository)
+
+	fmt.Println(userService)
+
 	e := echo.New()
 
 	// Start server

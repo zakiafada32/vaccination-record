@@ -38,8 +38,8 @@ func (s *service) Create(user User) (id string, err error) {
 	return user.ID, nil
 }
 
-func (s *service) FindAll() (users []User, err error) {
-	users, err = s.repository.FindAll()
+func (s *service) FindAll() ([]User, error) {
+	users, err := s.repository.FindAll()
 	if err != nil {
 		log.Println(err)
 		return []User{}, errors.New(business.InternalServerError)
@@ -47,8 +47,8 @@ func (s *service) FindAll() (users []User, err error) {
 	return users, nil
 }
 
-func (s *service) FindById(id string) (user User, err error) {
-	user, err = s.repository.FindById(id)
+func (s *service) FindById(id string) (User, error) {
+	user, err := s.repository.FindById(id)
 	if err != nil {
 		log.Println(err)
 		return User{}, errors.New(business.NotFound)
