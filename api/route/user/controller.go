@@ -2,9 +2,9 @@ package user
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/zakiafada32/vaccine/api/utils"
-	message "github.com/zakiafada32/vaccine/business"
-	userBusiness "github.com/zakiafada32/vaccine/business/user"
+	"github.com/zakiafada32/vaccination-record/api/utils"
+	message "github.com/zakiafada32/vaccination-record/business"
+	userBusiness "github.com/zakiafada32/vaccination-record/business/user"
 )
 
 type UserController struct {

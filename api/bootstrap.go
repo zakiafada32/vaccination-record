@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
-	"github.com/zakiafada32/vaccine/api/route/user"
-	"github.com/zakiafada32/vaccine/api/utils"
+	"github.com/zakiafada32/vaccination-record/api/route/user"
+	"github.com/zakiafada32/vaccination-record/api/utils"
 )
 
 type Controller struct {

@@ -4,8 +4,8 @@ import (
 	"errors"
 	"log"
 
-	"github.com/zakiafada32/vaccine/business"
-	"github.com/zakiafada32/vaccine/business/utils"
+	"github.com/zakiafada32/vaccination-record/business"
+	"github.com/zakiafada32/vaccination-record/business/utils"
 )
 
 type service struct {
@@ -74,4 +74,36 @@ func (s *service) FindById(id string) (User, error) {
 		return User{}, errors.New(business.NotFound)
 	}
 	return user, nil
+}
+
+func (s *service) AddHistory(userId string, vaccine Vaccine) ([]Vaccine, error) {
+	err := utils.GetValidator().Struct(vaccine)
+	if err != nil {
+		log.Println(err)
+		return []Vaccine{}, errors.New(business.BadRequest)
+	}
+
+	doctorId, err := s.repository.FindOrAddDoctor(vaccine.Doctor)
+	if err != nil {
+		return []Vaccine{}, errors.New(business.InternalServerError)
+	}
+	vaccine.Doctor.ID = doctorId
+
+	hospitalId, err := s.repository.FindOrAddHospital(vaccine.Hospital)
+	if err != nil {
+		return []Vaccine{}, errors.New(business.InternalServerError)
+	}
+	vaccine.Hospital.ID = hospitalId
+
+	err = s.repository.AddHistoryVaccine(userId, vaccine)
+	if err != nil {
+		return []Vaccine{}, errors.New(business.InternalServerError)
+	}
+
+	vaccines, err := s.repository.FindVaccinesByUserId(userId)
+	if err != nil {
+		return []Vaccine{}, errors.New(business.InternalServerError)
+	}
+
+	return vaccines, nil
 }

@@ -1,6 +1,6 @@
 package user
 
-import userBusiness "github.com/zakiafada32/vaccine/business/user"
+import userBusiness "github.com/zakiafada32/vaccination-record/business/user"
 
 type registerUserRequestBody struct {
 	IdentityCardNumber string `json:"identity_card_number" validate:"required,gt=15"`

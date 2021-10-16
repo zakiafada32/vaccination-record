@@ -12,12 +12,12 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
 
-	"github.com/zakiafada32/vaccine/api"
-	userController "github.com/zakiafada32/vaccine/api/route/user"
-	"github.com/zakiafada32/vaccine/app/config"
-	userService "github.com/zakiafada32/vaccine/business/user"
-	"github.com/zakiafada32/vaccine/modules"
-	userRepository "github.com/zakiafada32/vaccine/modules/user"
+	"github.com/zakiafada32/vaccination-record/api"
+	userController "github.com/zakiafada32/vaccination-record/api/route/user"
+	"github.com/zakiafada32/vaccination-record/app/config"
+	userService "github.com/zakiafada32/vaccination-record/business/user"
+	"github.com/zakiafada32/vaccination-record/modules"
+	repository "github.com/zakiafada32/vaccination-record/modules"
 )
 
 func init() {
@@ -28,7 +28,7 @@ func main() {
 	db := config.ConnectMySQL()
 	modules.Migrate(db)
 
-	userRepository := userRepository.NewUserRepository(db)
+	userRepository := repository.NewUserRepository(db)
 	userService := userService.NewUserService(userRepository)
 	userController := userController.NewUserController(userService)
 

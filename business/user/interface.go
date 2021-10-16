@@ -3,16 +3,18 @@ package user
 type Service interface {
 	FindAll() ([]User, error)
 	Create(user User) (id string, err error)
-	// AddHistory(vaccine Vaccine) ([]Vaccine, error)
+	AddHistory(userId string, vaccine Vaccine) ([]Vaccine, error)
 }
 
 type Repository interface {
-	FindById(id string) (User, error)
-	FindByIdentityCardNumber(idCard string) error
+	FindById(userId string) (User, error)
+	FindByIdentityCardNumber(cardId string) error
 	FindByEmail(email string) error
 	FindByPhoneNumber(phoneNumber string) error
 	FindAll() ([]User, error)
 	Create(user User) error
-	// FindHospitalByName(name string) (Hospital, error)
-	// FindDoctorByStrNumber(strNumber string) (Doctor, error)
+	FindOrAddHospital(hospital Hospital) (hospitalId uint32, err error)
+	FindOrAddDoctor(doctor Doctor) (doctorId uint32, err error)
+	AddHistoryVaccine(userId string, vaccine Vaccine) error
+	FindVaccinesByUserId(userId string) ([]Vaccine, error)
 }

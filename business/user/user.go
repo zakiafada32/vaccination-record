@@ -20,11 +20,13 @@ type Vaccine struct {
 }
 
 type Hospital struct {
+	ID      uint32 `json:"id"`
 	Name    string `json:"name" validate:"required"`
 	Address string `json:"address" validate:"required"`
 }
 
 type Doctor struct {
+	ID        uint32 `json:"id"`
 	Name      string `json:"name" validate:"required"`
 	StrNumber string `json:"str_number" validate:"required"`
 }

@@ -3,7 +3,7 @@ package utils
 import (
 	"net/http"
 
-	"github.com/zakiafada32/vaccine/business"
+	"github.com/zakiafada32/vaccination-record/business"
 )
 
 type ResponseFormat struct {

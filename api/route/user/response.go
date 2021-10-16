@@ -1,6 +1,6 @@
 package user
 
-import userBusiness "github.com/zakiafada32/vaccine/business/user"
+import userBusiness "github.com/zakiafada32/vaccination-record/business/user"
 
 type userResponse struct {
 	ID                 string `json:"id"`

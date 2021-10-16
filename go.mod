@@ -1,4 +1,4 @@
-module github.com/zakiafada32/vaccine
+module github.com/zakiafada32/vaccination-record
 
 go 1.17
 
