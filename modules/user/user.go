@@ -54,10 +54,37 @@ func (repo *userRepository) FindById(id string) (userBusiness.User, error) {
 	var userData User
 	err := repo.db.Where("id = ?", id).First(&userData).Error
 	if err != nil {
-		return userBusiness.User{}, nil
+		return userBusiness.User{}, err
 	}
 	user := convertToUserBusiness(userData)
 	return user, nil
+}
+
+func (repo *userRepository) FindByIdentityCardNumber(idCard string) error {
+	var userData User
+	err := repo.db.Where("identity_card_number = ?", idCard).First(&userData).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (repo *userRepository) FindByEmail(email string) error {
+	var userData User
+	err := repo.db.Where("email = ?", email).First(&userData).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (repo *userRepository) FindByPhoneNumber(phoneNumber string) error {
+	var userData User
+	err := repo.db.Where("phone_number = ?", phoneNumber).First(&userData).Error
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func convertToUserModel(user userBusiness.User) User {

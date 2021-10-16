@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,6 +12,8 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
 
+	"github.com/zakiafada32/vaccine/api"
+	userController "github.com/zakiafada32/vaccine/api/route/user"
 	"github.com/zakiafada32/vaccine/app/config"
 	userService "github.com/zakiafada32/vaccine/business/user"
 	"github.com/zakiafada32/vaccine/modules"
@@ -29,17 +30,22 @@ func main() {
 
 	userRepository := userRepository.NewUserRepository(db)
 	userService := userService.NewUserService(userRepository)
+	userController := userController.NewUserController(userService)
 
-	fmt.Println(userService)
+	controller := api.Controller{
+		User: userController,
+	}
 
 	e := echo.New()
+
+	api.Bootstrap(e, &controller)
 
 	// Start server
 	e.Logger.SetLevel(log.INFO)
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	go func() {
-		if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {
+		if err := e.Start(":7000"); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down the server")
 		}
 	}()

@@ -1,3 +1,5 @@
 tmp
 note.txt
 *.toml
+*dev.yml
+*.http
