@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/labstack/echo/v4"
+
 	message "github.com/zakiafada32/vaccination-record/business"
 	userBusiness "github.com/zakiafada32/vaccination-record/business/user"
 	"github.com/zakiafada32/vaccination-record/utils"
@@ -29,7 +30,7 @@ func (uc *UserController) Register(c echo.Context) error {
 		return err
 	}
 
-	id, err := uc.service.Create(body.convertToUserBusiness())
+	id, err := uc.service.RegisterUser(body.convertToUserBusiness())
 	if err != nil {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
@@ -40,7 +41,7 @@ func (uc *UserController) Register(c echo.Context) error {
 }
 
 func (uc *UserController) FindAll(c echo.Context) error {
-	users, err := uc.service.FindAll()
+	users, err := uc.service.FindAllUser()
 	if err != nil {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
@@ -50,19 +51,7 @@ func (uc *UserController) FindAll(c echo.Context) error {
 		usersData[i] = convertToUserResponse(user)
 	}
 
-	return c.JSON(utils.ConstructResponse(message.SuccessCreated, echo.Map{
+	return c.JSON(utils.ConstructResponse(message.Success, echo.Map{
 		"users": usersData,
 	}))
-}
-
-func (uc *UserController) AddHistory(c echo.Context) error {
-	return nil
-}
-
-func (uc *UserController) DeleteHistory(c echo.Context) error {
-	return nil
-}
-
-func (uc *UserController) FindByIdCard(c echo.Context) error {
-	return nil
 }

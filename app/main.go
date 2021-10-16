@@ -13,9 +13,15 @@ import (
 	"github.com/labstack/gommon/log"
 
 	"github.com/zakiafada32/vaccination-record/api"
+	doctorController "github.com/zakiafada32/vaccination-record/api/doctor"
+	hospitalController "github.com/zakiafada32/vaccination-record/api/hospital"
 	userController "github.com/zakiafada32/vaccination-record/api/user"
+	vaccineController "github.com/zakiafada32/vaccination-record/api/vaccine"
 	"github.com/zakiafada32/vaccination-record/app/config"
+	doctorService "github.com/zakiafada32/vaccination-record/business/doctor"
+	hospitalService "github.com/zakiafada32/vaccination-record/business/hospital"
 	userService "github.com/zakiafada32/vaccination-record/business/user"
+	vaccineService "github.com/zakiafada32/vaccination-record/business/vaccine"
 	repository "github.com/zakiafada32/vaccination-record/modules"
 )
 
@@ -31,8 +37,23 @@ func main() {
 	userService := userService.NewUserService(userRepository)
 	userController := userController.NewUserController(userService)
 
+	vaccineRepository := repository.NewVaccineRepository(db)
+	vaccineService := vaccineService.NewVaccineService(vaccineRepository)
+	vaccineController := vaccineController.NewVaccineController(vaccineService)
+
+	doctorRepository := repository.NewDoctorRepository(db)
+	doctorService := doctorService.NewDoctorService(doctorRepository)
+	doctorController := doctorController.NewDoctorController(doctorService)
+
+	hospitalRepository := repository.NewHospitalRepository(db)
+	hospitalService := hospitalService.NewHospitalService(hospitalRepository)
+	hospitalController := hospitalController.NewHospitalController(hospitalService)
+
 	controller := api.Controller{
-		User: userController,
+		User:     userController,
+		Vaccine:  vaccineController,
+		Doctor:   doctorController,
+		Hospital: hospitalController,
 	}
 
 	e := echo.New()

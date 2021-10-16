@@ -18,26 +18,26 @@ func NewUserService(repo Repository) Service {
 	}
 }
 
-func (s *service) Create(user User) (id string, err error) {
+func (s *service) RegisterUser(user User) (id string, err error) {
 	err = utils.GetValidatorStruct().Struct(user)
 	if err != nil {
 		log.Println(err)
 		return "", errors.New(business.BadRequest)
 	}
 
-	err = s.repository.FindByIdentityCardNumber(user.IdentityCardNumber)
+	err = s.repository.FindUserByIdentityCardNumber(user.IdentityCardNumber)
 	if err == nil {
 		log.Println("identity card number already existed")
 		return "", errors.New(business.IdentityCardNumberAlreadyExist)
 	}
 
-	err = s.repository.FindByPhoneNumber(user.PhoneNumber)
+	err = s.repository.FindUserByPhoneNumber(user.PhoneNumber)
 	if err == nil {
 		log.Println("phone number already existed")
 		return "", errors.New(business.PhoneNumberAlreadyExist)
 	}
 
-	err = s.repository.FindByEmail(user.Email)
+	err = s.repository.FindUserByEmail(user.Email)
 	if err == nil {
 		log.Println("email alredy exist")
 		return "", errors.New(business.EmailAlreadyExist)
@@ -50,7 +50,7 @@ func (s *service) Create(user User) (id string, err error) {
 		return "", errors.New(business.InternalServerError)
 	}
 
-	err = s.repository.Create(user)
+	err = s.repository.RegisterUser(user)
 	if err != nil {
 		log.Println(err)
 		return "", errors.New(business.InternalServerError)
@@ -58,8 +58,8 @@ func (s *service) Create(user User) (id string, err error) {
 	return user.ID, nil
 }
 
-func (s *service) FindAll() ([]User, error) {
-	users, err := s.repository.FindAll()
+func (s *service) FindAllUser() ([]User, error) {
+	users, err := s.repository.FindAllUser()
 	if err != nil {
 		log.Println(err)
 		return []User{}, errors.New(business.InternalServerError)
@@ -68,42 +68,10 @@ func (s *service) FindAll() ([]User, error) {
 }
 
 func (s *service) FindById(id string) (User, error) {
-	user, err := s.repository.FindById(id)
+	user, err := s.repository.FindUserById(id)
 	if err != nil {
 		log.Println(err)
 		return User{}, errors.New(business.NotFound)
 	}
 	return user, nil
-}
-
-func (s *service) AddHistory(userId string, vaccine Vaccine) ([]Vaccine, error) {
-	err := utils.GetValidatorStruct().Struct(vaccine)
-	if err != nil {
-		log.Println(err)
-		return []Vaccine{}, errors.New(business.BadRequest)
-	}
-
-	doctorId, err := s.repository.FindOrAddDoctor(vaccine.Doctor)
-	if err != nil {
-		return []Vaccine{}, errors.New(business.InternalServerError)
-	}
-	vaccine.Doctor.ID = doctorId
-
-	hospitalId, err := s.repository.FindOrAddHospital(vaccine.Hospital)
-	if err != nil {
-		return []Vaccine{}, errors.New(business.InternalServerError)
-	}
-	vaccine.Hospital.ID = hospitalId
-
-	err = s.repository.AddHistoryVaccine(userId, vaccine)
-	if err != nil {
-		return []Vaccine{}, errors.New(business.InternalServerError)
-	}
-
-	vaccines, err := s.repository.FindVaccinesByUserId(userId)
-	if err != nil {
-		return []Vaccine{}, errors.New(business.InternalServerError)
-	}
-
-	return vaccines, nil
 }

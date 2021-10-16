@@ -1,8 +1,9 @@
 package modules
 
 import (
-	userBusiness "github.com/zakiafada32/vaccination-record/business/user"
 	"gorm.io/gorm"
+
+	hospitalBusiness "github.com/zakiafada32/vaccination-record/business/hospital"
 )
 
 type Hospital struct {
@@ -21,8 +22,30 @@ func NewHospitalRepository(db *gorm.DB) *hospitalRepository {
 	}
 }
 
-func convertToHospitalModel(data userBusiness.Hospital) Hospital {
+func (repo *hospitalRepository) FindAllHospital() ([]hospitalBusiness.Hospital, error) {
+	var hospitalsData []Hospital
+	err := repo.db.Find(&hospitalsData).Error
+	if err != nil {
+		return []hospitalBusiness.Hospital{}, err
+	}
+
+	hospitals := make([]hospitalBusiness.Hospital, len(hospitalsData))
+	for i, hospital := range hospitalsData {
+		hospitals[i] = convertToHospitalBusiness(hospital)
+	}
+
+	return hospitals, nil
+}
+
+func convertToHospitalModel(data hospitalBusiness.Hospital) Hospital {
 	return Hospital{
+		Name:    data.Name,
+		Address: data.Address,
+	}
+}
+
+func convertToHospitalBusiness(data Hospital) hospitalBusiness.Hospital {
+	return hospitalBusiness.Hospital{
 		Name:    data.Name,
 		Address: data.Address,
 	}
