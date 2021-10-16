@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/zakiafada32/vaccination-record/business"
-	"github.com/zakiafada32/vaccination-record/business/utils"
+	"github.com/zakiafada32/vaccination-record/utils"
 )
 
 type service struct {
@@ -19,7 +19,7 @@ func NewUserService(repo Repository) Service {
 }
 
 func (s *service) Create(user User) (id string, err error) {
-	err = utils.GetValidator().Struct(user)
+	err = utils.GetValidatorStruct().Struct(user)
 	if err != nil {
 		log.Println(err)
 		return "", errors.New(business.BadRequest)
@@ -77,7 +77,7 @@ func (s *service) FindById(id string) (User, error) {
 }
 
 func (s *service) AddHistory(userId string, vaccine Vaccine) ([]Vaccine, error) {
-	err := utils.GetValidator().Struct(vaccine)
+	err := utils.GetValidatorStruct().Struct(vaccine)
 	if err != nil {
 		log.Println(err)
 		return []Vaccine{}, errors.New(business.BadRequest)

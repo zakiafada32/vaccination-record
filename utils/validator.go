@@ -2,6 +2,7 @@ package utils
 
 import (
 	"net/http"
+	"sync"
 
 	"github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"
@@ -49,4 +50,18 @@ func translateIndividual(trans ut.Translator, err error) string {
 	}
 
 	return "validation error"
+}
+
+var lock = &sync.Mutex{}
+var validate *validator.Validate
+
+func GetValidatorStruct() *validator.Validate {
+	lock.Lock()
+	defer lock.Unlock()
+
+	if validate == nil {
+		validate = validator.New()
+	}
+
+	return validate
 }

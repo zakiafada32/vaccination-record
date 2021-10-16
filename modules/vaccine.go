@@ -4,7 +4,7 @@ import (
 	"time"
 
 	userBusiness "github.com/zakiafada32/vaccination-record/business/user"
-	"github.com/zakiafada32/vaccination-record/modules/utils"
+	"github.com/zakiafada32/vaccination-record/utils"
 
 	"gorm.io/gorm"
 )
