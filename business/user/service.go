@@ -25,22 +25,22 @@ func (s *service) Create(user User) (id string, err error) {
 		return "", errors.New(business.BadRequest)
 	}
 
-	err = s.repository.FindByEmail(user.Email)
-	if err == nil {
-		log.Println("email alredy exist")
-		return "", errors.New(business.BadRequest)
-	}
-
 	err = s.repository.FindByIdentityCardNumber(user.IdentityCardNumber)
 	if err == nil {
 		log.Println("identity card number already existed")
-		return "", errors.New(business.BadRequest)
+		return "", errors.New(business.IdentityCardNumberAlreadyExist)
 	}
 
 	err = s.repository.FindByPhoneNumber(user.PhoneNumber)
 	if err == nil {
 		log.Println("phone number already existed")
-		return "", errors.New(business.BadRequest)
+		return "", errors.New(business.PhoneNumberAlreadyExist)
+	}
+
+	err = s.repository.FindByEmail(user.Email)
+	if err == nil {
+		log.Println("email alredy exist")
+		return "", errors.New(business.EmailAlreadyExist)
 	}
 
 	user.ID = utils.GenerateID()

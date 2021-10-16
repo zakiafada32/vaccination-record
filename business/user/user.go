@@ -10,3 +10,21 @@ type User struct {
 	Address            string `json:"address" validate:"required"`
 	Password           string `json:"password" validate:"required,gt=6"`
 }
+
+type Vaccine struct {
+	ID             uint32 `json:"id"`
+	Description    string `json:"description"`
+	VaccinatedDate string `json:"vaccinated_date"`
+	Hospital       Hospital
+	Doctor         Doctor
+}
+
+type Hospital struct {
+	Name    string `json:"name" validate:"required"`
+	Address string `json:"address" validate:"required"`
+}
+
+type Doctor struct {
+	Name      string `json:"name" validate:"required"`
+	StrNumber string `json:"str_number" validate:"required"`
+}

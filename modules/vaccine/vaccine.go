@@ -7,25 +7,25 @@ import (
 )
 
 type Vaccine struct {
-	ID             string    `gorm:"primaryKey;size:36"`
+	ID             uint32    `gorm:"primaryKey"`
 	Description    string    `gorm:"not null;size:255"`
 	VaccinatedDate time.Time `gorm:"not null"`
 	UserID         string    `gorm:"not null;size:36"`
 	User           user.User
-	HospitalID     string `gorm:"not null;size:36"`
+	HospitalID     string `gorm:"not null"`
 	Hospital       Hospital
-	DoctorID       string `gorm:"not null;size:36"`
+	DoctorID       string `gorm:"not null"`
 	Doctor         Doctor
 }
 
 type Hospital struct {
-	ID      string `gorm:"primaryKey;size:36"`
-	Name    string `gorm:"not null;size:255"`
+	ID      uint32 `gorm:"primaryKey"`
+	Name    string `gorm:"not null;size:255;unique"`
 	Address string `gorm:"not null;size:255"`
 }
 
 type Doctor struct {
-	ID        string `gorm:"primaryKey;size:36"`
+	ID        uint32 `gorm:"primaryKey"`
 	Name      string `gorm:"not null;size:255"`
-	StrNumber string `gorm:"not null;size:20"`
+	StrNumber string `gorm:"not null;size:20;unique"`
 }
