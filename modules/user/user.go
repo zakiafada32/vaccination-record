@@ -1,19 +1,22 @@
 package user
 
 import (
+	"time"
+
 	userBusiness "github.com/zakiafada32/vaccine/business/user"
+	"github.com/zakiafada32/vaccine/modules/utils"
 	"gorm.io/gorm"
 )
 
 type User struct {
-	ID                 string `gorm:"primaryKey"`
-	IdentityCardNumber string `gorm:"unique"`
-	Name               string `gorm:"not null	"`
-	Email              string `gorm:"unique"`
-	PhoneNumber        string `gorm:"unique"`
-	Dob                string `gorm:"not null	"`
-	Address            string `gorm:"not null	"`
-	Password           string `gorm:"not null	"`
+	ID                 string    `gorm:"primaryKey;size:36"`
+	IdentityCardNumber string    `gorm:"not null;unique;size:16"`
+	Name               string    `gorm:"not null;size:255"`
+	Email              string    `gorm:"not null;unique;size:255"`
+	PhoneNumber        string    `gorm:"not null;unique;size:16"`
+	Dob                time.Time `gorm:"not null"`
+	Address            string    `gorm:"not null;size:255"`
+	Password           string    `gorm:"not null;size:255"`
 }
 
 type userRepository struct {
@@ -94,7 +97,7 @@ func convertToUserModel(user userBusiness.User) User {
 		Name:               user.Name,
 		Email:              user.Email,
 		PhoneNumber:        user.PhoneNumber,
-		Dob:                user.Dob,
+		Dob:                utils.ConvertStringToDate(user.Dob),
 		Password:           user.Password,
 		Address:            user.Address,
 	}
@@ -107,7 +110,7 @@ func convertToUserBusiness(user User) userBusiness.User {
 		Name:               user.Name,
 		Email:              user.Email,
 		PhoneNumber:        user.PhoneNumber,
-		Dob:                user.Dob,
+		Dob:                utils.ConvertDateToString(user.Dob),
 		Password:           user.Password,
 		Address:            user.Address,
 	}

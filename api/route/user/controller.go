@@ -17,8 +17,8 @@ func NewUserController(service userBusiness.Service) *UserController {
 	}
 }
 
-func (uc *UserController) Create(c echo.Context) error {
-	var body createUserRequestBody
+func (uc *UserController) Register(c echo.Context) error {
+	var body registerUserRequestBody
 	err := c.Bind(&body)
 	if err != nil {
 		return c.JSON(utils.ConstructResponse(message.BadRequest, echo.Map{}))
@@ -53,4 +53,16 @@ func (uc *UserController) FindAll(c echo.Context) error {
 	return c.JSON(utils.ConstructResponse(message.SuccessCreated, echo.Map{
 		"users": usersData,
 	}))
+}
+
+func (uc *UserController) AddHistory(c echo.Context) error {
+	return nil
+}
+
+func (uc *UserController) DeleteHistory(c echo.Context) error {
+	return nil
+}
+
+func (uc *UserController) FindByIdCard(c echo.Context) error {
+	return nil
 }

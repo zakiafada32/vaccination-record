@@ -2,7 +2,7 @@ package user
 
 import userBusiness "github.com/zakiafada32/vaccine/business/user"
 
-type createUserRequestBody struct {
+type registerUserRequestBody struct {
 	IdentityCardNumber string `json:"identity_card_number" validate:"required,gt=15"`
 	Name               string `json:"name" validate:"required"`
 	Email              string `json:"email" validate:"required,email"`
@@ -12,7 +12,7 @@ type createUserRequestBody struct {
 	Password           string `json:"password" validate:"required,gt=6"`
 }
 
-func (req *createUserRequestBody) convertToUserBusiness() userBusiness.User {
+func (req *registerUserRequestBody) convertToUserBusiness() userBusiness.User {
 	return userBusiness.User{
 		IdentityCardNumber: req.IdentityCardNumber,
 		Name:               req.Name,
