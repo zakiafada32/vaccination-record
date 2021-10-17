@@ -52,7 +52,12 @@ func (s *service) AddHistory(userId string, vaccine Vaccine) ([]VaccineResponse,
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 
-	return vaccines, nil
+	vaccinesResponse := make([]VaccineResponse, len(vaccines))
+	for i, vaccine := range vaccines {
+		vaccinesResponse[i] = ConvertToVaccineResponse(vaccine)
+	}
+
+	return vaccinesResponse, nil
 }
 
 func (s *service) DeleteHistory(userId string, vaccineId uint32) ([]VaccineResponse, error) {
@@ -71,6 +76,26 @@ func (s *service) DeleteHistory(userId string, vaccineId uint32) ([]VaccineRespo
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 
-	return vaccines, nil
+	vaccinesResponse := make([]VaccineResponse, len(vaccines))
+	for i, vaccine := range vaccines {
+		vaccinesResponse[i] = ConvertToVaccineResponse(vaccine)
+	}
 
+	return vaccinesResponse, nil
+}
+
+func ConvertToVaccineResponse(data Vaccine) VaccineResponse {
+	return VaccineResponse{
+		ID:             data.ID,
+		Description:    data.Description,
+		VaccinatedDate: data.VaccinatedDate,
+		Hospital: hospitalResponse{
+			Name:    data.Hospital.Name,
+			Address: data.Hospital.Address,
+		},
+		Doctor: doctorResponse{
+			Name:      data.Doctor.Name,
+			StrNumber: data.Doctor.StrNumber,
+		},
+	}
 }

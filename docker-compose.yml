@@ -1,8 +1,9 @@
 version: '3.8'
 
 services:
-  mysql:
+  vaccination-mysql:
     image: mysql
+    container_name: vaccination-mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     networks:
@@ -15,10 +16,10 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - vaccine-db:/var/lib/mysql
+      - vaccination-db:/var/lib/mysql
 
 volumes:
-  vaccine-db:
+  vaccination-db:
 
 networks:
   mynet:

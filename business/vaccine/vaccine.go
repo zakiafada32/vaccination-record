@@ -6,7 +6,7 @@ import (
 )
 
 type Vaccine struct {
-	ID             uint32 `json:"id"`
+	ID             uint32 `json:"history_unique_id"`
 	Description    string `json:"description" validate:"required"`
 	VaccinatedDate string `json:"vaccinated_date" validate:"required"`
 	Hospital       hospital.Hospital
@@ -14,19 +14,19 @@ type Vaccine struct {
 }
 
 type VaccineResponse struct {
-	ID             uint32 `json:"id"`
+	ID             uint32 `json:"history_unique_id"`
 	Description    string `json:"description"`
 	VaccinatedDate string `json:"vaccinated_date"`
-	Hospital       HospitalResponse
-	Doctor         DoctorResponse
+	Hospital       hospitalResponse
+	Doctor         doctorResponse
 }
 
-type HospitalResponse struct {
+type hospitalResponse struct {
 	Name    string `json:"name"`
 	Address string `json:"address"`
 }
 
-type DoctorResponse struct {
+type doctorResponse struct {
 	Name      string `json:"name"`
 	StrNumber string `json:"str_number"`
 }

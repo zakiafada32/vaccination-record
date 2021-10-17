@@ -62,14 +62,14 @@ func (repo *vaccineRepository) AddHistoryVaccine(userId string, data vaccineBusi
 	return nil
 }
 
-func (repo *vaccineRepository) FindVaccinesByUserId(userId string) ([]vaccineBusiness.VaccineResponse, error) {
+func (repo *vaccineRepository) FindVaccinesByUserId(userId string) ([]vaccineBusiness.Vaccine, error) {
 	var vaccines []Vaccine
 	err := repo.db.Order("vaccinated_date desc").Preload(clause.Associations).Where("user_id = ?", userId).Find(&vaccines).Error
 	if err != nil {
-		return []vaccineBusiness.VaccineResponse{}, err
+		return []vaccineBusiness.Vaccine{}, err
 	}
 
-	vaccinesData := make([]vaccineBusiness.VaccineResponse, len(vaccines))
+	vaccinesData := make([]vaccineBusiness.Vaccine, len(vaccines))
 	for i, vaccine := range vaccines {
 		vaccinesData[i] = convertToVaccineBusiness(vaccine)
 	}
@@ -116,18 +116,12 @@ func convertToVaccineModel(userId string, data vaccineBusiness.Vaccine) Vaccine 
 	}
 }
 
-func convertToVaccineBusiness(data Vaccine) vaccineBusiness.VaccineResponse {
-	return vaccineBusiness.VaccineResponse{
+func convertToVaccineBusiness(data Vaccine) vaccineBusiness.Vaccine {
+	return vaccineBusiness.Vaccine{
 		ID:             data.ID,
 		Description:    data.Description,
 		VaccinatedDate: utils.ConvertDateToString(data.VaccinatedDate),
-		Hospital: vaccineBusiness.HospitalResponse{
-			Name:    data.Hospital.Name,
-			Address: data.Hospital.Address,
-		},
-		Doctor: vaccineBusiness.DoctorResponse{
-			Name:      data.Doctor.Name,
-			StrNumber: data.Doctor.StrNumber,
-		},
+		Hospital:       convertToHospitalBusiness(data.Hospital),
+		Doctor:         convertToDoctorBusiness(data.Doctor),
 	}
 }

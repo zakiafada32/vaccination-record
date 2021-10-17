@@ -25,7 +25,7 @@ WORKDIR /app
 
 COPY --from=build /app ./
 
-EXPOSE 8080
+EXPOSE 7000
 
 USER nonroot:nonroot
 

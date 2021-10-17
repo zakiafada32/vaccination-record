@@ -4,8 +4,10 @@ import (
 	"time"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 
 	userBusiness "github.com/zakiafada32/vaccination-record/business/user"
+	vaccineBusiness "github.com/zakiafada32/vaccination-record/business/vaccine"
 	"github.com/zakiafada32/vaccination-record/utils"
 )
 
@@ -64,13 +66,14 @@ func (repo *userRepository) FindUserById(id string) (userBusiness.User, error) {
 	return user, nil
 }
 
-func (repo *userRepository) FindUserByIdentityCardNumber(idCard string) error {
+func (repo *userRepository) FindUserByIdentityCardNumber(cardId string) (userBusiness.User, error) {
 	var userData User
-	err := repo.db.Where("identity_card_number = ?", idCard).First(&userData).Error
+	err := repo.db.Where("identity_card_number = ?", cardId).First(&userData).Error
 	if err != nil {
-		return err
+		return userBusiness.User{}, err
 	}
-	return nil
+	user := convertToUserBusiness(userData)
+	return user, nil
 }
 
 func (repo *userRepository) FindUserByEmail(email string) error {
@@ -89,6 +92,17 @@ func (repo *userRepository) FindUserByPhoneNumber(phoneNumber string) error {
 		return err
 	}
 	return nil
+}
+
+func (repo *userRepository) FindLatestVaccineHistoryOfUser(userId string) (vaccineBusiness.Vaccine, error) {
+	var vaccine Vaccine
+	err := repo.db.Order("vaccinated_date desc").Preload(clause.Associations).Where("user_id = ?", userId).First(&vaccine).Error
+	if err != nil {
+		return vaccineBusiness.Vaccine{}, err
+	}
+
+	vaccineData := convertToVaccineBusiness(vaccine)
+	return vaccineData, nil
 }
 
 func convertToUserModel(data userBusiness.User) User {

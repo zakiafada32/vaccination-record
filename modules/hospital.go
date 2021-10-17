@@ -46,6 +46,7 @@ func convertToHospitalModel(data hospitalBusiness.Hospital) Hospital {
 
 func convertToHospitalBusiness(data Hospital) hospitalBusiness.Hospital {
 	return hospitalBusiness.Hospital{
+		ID:      data.ID,
 		Name:    data.Name,
 		Address: data.Address,
 	}

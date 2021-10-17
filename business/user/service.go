@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/zakiafada32/vaccination-record/business"
+	"github.com/zakiafada32/vaccination-record/business/vaccine"
 	"github.com/zakiafada32/vaccination-record/utils"
 )
 
@@ -25,7 +26,7 @@ func (s *service) RegisterUser(user User) (id string, err error) {
 		return "", errors.New(business.BadRequest)
 	}
 
-	err = s.repository.FindUserByIdentityCardNumber(user.IdentityCardNumber)
+	_, err = s.repository.FindUserByIdentityCardNumber(user.IdentityCardNumber)
 	if err == nil {
 		log.Println("identity card number already existed")
 		return "", errors.New(business.IdentityCardNumberAlreadyExist)
@@ -58,13 +59,18 @@ func (s *service) RegisterUser(user User) (id string, err error) {
 	return user.ID, nil
 }
 
-func (s *service) FindAllUser() ([]User, error) {
+func (s *service) FindAllUser() ([]userResponse, error) {
 	users, err := s.repository.FindAllUser()
 	if err != nil {
 		log.Println(err)
-		return []User{}, errors.New(business.InternalServerError)
+		return []userResponse{}, errors.New(business.InternalServerError)
 	}
-	return users, nil
+
+	usersRespose := make([]userResponse, len(users))
+	for i, user := range users {
+		usersRespose[i] = convertToUserResponse(user)
+	}
+	return usersRespose, nil
 }
 
 func (s *service) FindById(id string) (User, error) {
@@ -74,4 +80,50 @@ func (s *service) FindById(id string) (User, error) {
 		return User{}, errors.New(business.NotFound)
 	}
 	return user, nil
+}
+
+func (s *service) CheckStatus(cardId, name, password string) (checkStatus, error) {
+	user, err := s.repository.FindUserByIdentityCardNumber(cardId)
+	if err != nil {
+		log.Println(err)
+		return checkStatus{}, errors.New(business.NotFound)
+	}
+
+	if user.Name != name {
+		log.Println(err)
+		return checkStatus{}, errors.New(business.NotFound)
+	}
+
+	err = utils.CompareHash(user.Password, password)
+	if err != nil {
+		log.Println(err)
+		return checkStatus{}, errors.New(business.PasswordIncorrect)
+	}
+
+	vaccineData, err := s.repository.FindLatestVaccineHistoryOfUser(user.ID)
+	if err != nil {
+		log.Println(err)
+		return checkStatus{}, errors.New(business.InternalServerError)
+	}
+
+	userStatus := checkStatus{
+		ID:                 user.ID,
+		IdentityCardNumber: user.IdentityCardNumber,
+		Name:               user.Name,
+		Vaccine:            vaccine.ConvertToVaccineResponse(vaccineData),
+	}
+
+	return userStatus, nil
+}
+
+func convertToUserResponse(user User) userResponse {
+	return userResponse{
+		ID:                 user.ID,
+		IdentityCardNumber: user.IdentityCardNumber,
+		Name:               user.Name,
+		Email:              user.Email,
+		PhoneNumber:        user.PhoneNumber,
+		Dob:                user.Dob,
+		Address:            user.Address,
+	}
 }

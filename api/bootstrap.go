@@ -37,11 +37,17 @@ func Bootstrap(e *echo.Echo, c *Controller) {
 
 	e.Validator = &utils.CustomValidator{Validator: validator.New()}
 
-	routeV1 := e.Group("api/vaccine-user")
+	routeV1 := e.Group("api")
 
-	routeV1.POST("/register", c.User.Register)
-	routeV1.GET("", c.User.FindAll)
+	routeV1.POST("/vaccine-user/register", c.User.Register)
+	routeV1.GET("/vaccine-user", c.User.FindAll)
 
-	routeV1.POST("/:userId/add-history", c.Vaccine.AddHistory)
-	routeV1.DELETE("/:userId/del-history/:vaccineId", c.Vaccine.DeleteHistory)
+	routeV1.POST("/vaccine-user/:userId/add-history", c.Vaccine.AddHistory)
+	routeV1.DELETE("/vaccine-user/:userId/del-history/:vaccineId", c.Vaccine.DeleteHistory)
+
+	routeV1.POST("/vaccine/check-status", c.User.CheckStatus)
+
+	routeV1.GET("/hospitals", c.Hospital.FindAll)
+
+	routeV1.GET("/doctors", c.Doctor.FindAll)
 }

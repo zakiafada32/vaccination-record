@@ -46,6 +46,7 @@ func convertToDoctorModel(data doctorBusiness.Doctor) Doctor {
 
 func convertToDoctorBusiness(data Doctor) doctorBusiness.Doctor {
 	return doctorBusiness.Doctor{
+		ID:        data.ID,
 		Name:      data.Name,
 		StrNumber: data.StrNumber,
 	}

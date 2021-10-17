@@ -15,7 +15,7 @@ type Repository interface {
 	FindOrAddHospital(hospital hospital.Hospital) (hospitalId uint32, err error)
 	FindOrAddDoctor(doctor doctor.Doctor) (doctorId uint32, err error)
 	AddHistoryVaccine(userId string, vaccine Vaccine) error
-	FindVaccinesByUserId(userId string) ([]VaccineResponse, error)
+	FindVaccinesByUserId(userId string) ([]Vaccine, error)
 	FindVaccinesByVaccineIdAndUserId(userId string, vaccineId uint32) error
 	DeleteVaccineByVaccineIdAndUserId(userId string, vaccineId uint32) error
 }

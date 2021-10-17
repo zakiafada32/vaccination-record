@@ -14,4 +14,5 @@ var (
 	PhoneNumberAlreadyExist        = "phone number already exist"
 	IdentityCardNumberAlreadyExist = "identity card number already exist"
 	EmailAlreadyExist              = "email already exist"
+	PasswordIncorrect              = "password incorrect"
 )

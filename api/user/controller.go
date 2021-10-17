@@ -46,12 +46,24 @@ func (uc *UserController) FindAll(c echo.Context) error {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
 
-	usersData := make([]userResponse, len(users))
-	for i, user := range users {
-		usersData[i] = convertToUserResponse(user)
+	return c.JSON(utils.ConstructResponse(message.Success, echo.Map{
+		"users": users,
+	}))
+}
+
+func (uc *UserController) CheckStatus(c echo.Context) error {
+	var body checkStatusRequestBody
+	err := c.Bind(&body)
+	if err != nil {
+		return c.JSON(utils.ConstructResponse(message.BadRequest, echo.Map{}))
+	}
+
+	userStatus, err := uc.service.CheckStatus(body.IdentityCardNumber, body.Name, body.Password)
+	if err != nil {
+		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
 
 	return c.JSON(utils.ConstructResponse(message.Success, echo.Map{
-		"users": usersData,
+		"status": userStatus,
 	}))
 }

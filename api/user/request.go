@@ -23,3 +23,9 @@ func (req *registerUserRequestBody) convertToUserBusiness() userBusiness.User {
 		Password:           req.Password,
 	}
 }
+
+type checkStatusRequestBody struct {
+	IdentityCardNumber string `json:"identity_card_number" validate:"required,gt=15"`
+	Name               string `json:"name" validate:"required"`
+	Password           string `json:"password" validate:"required,gt=6"`
+}
