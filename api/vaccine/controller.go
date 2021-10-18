@@ -38,9 +38,7 @@ func (uc *VaccineController) AddHistory(c echo.Context) error {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
 
-	return c.JSON(utils.ConstructResponse(message.SuccessCreated, echo.Map{
-		"vaccines": vaccines,
-	}))
+	return c.JSON(utils.ConstructResponse(message.SuccessCreated, vaccines))
 }
 
 func (uc *VaccineController) DeleteHistory(c echo.Context) error {
@@ -57,7 +55,5 @@ func (uc *VaccineController) DeleteHistory(c echo.Context) error {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
 
-	return c.JSON(utils.ConstructResponse(message.SuccessDeleted, echo.Map{
-		"vaccines": vaccines,
-	}))
+	return c.JSON(utils.ConstructResponse(message.SuccessDeleted, vaccines))
 }

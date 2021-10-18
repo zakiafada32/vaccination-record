@@ -100,12 +100,6 @@ func (s *service) CheckStatus(cardId, name, password string) (checkStatus, error
 		return checkStatus{}, errors.New(business.NotFound)
 	}
 
-	// vaccineData, err := s.repository.FindLatestVaccineHistoryOfUser(user.ID)
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return checkStatus{}, errors.New(business.InternalServerError)
-	// }
-
 	vaccineData, err := s.repository.FindVaccinesByUserId(user.ID)
 	if err != nil {
 		log.Println(err)

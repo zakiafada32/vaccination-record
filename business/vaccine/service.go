@@ -28,7 +28,7 @@ func (s *service) AddHistory(userId string, vaccine Vaccine) ([]VaccineResponse,
 	err = s.repository.FindUserById(userId)
 	if err != nil {
 		log.Println(err)
-		return []VaccineResponse{}, errors.New(business.NotFound)
+		return []VaccineResponse{}, errors.New(business.BadRequest)
 	}
 
 	doctorId, err := s.repository.FindOrAddDoctor(vaccine.Doctor)

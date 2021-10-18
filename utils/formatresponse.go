@@ -12,7 +12,7 @@ type ResponseFormat struct {
 	Data    interface{} `json:"data"`
 }
 
-func ConstructResponse(status string, data map[string]interface{}) (int, ResponseFormat) {
+func ConstructResponse(status string, data interface{}) (int, ResponseFormat) {
 	var httpStatus int
 	var response ResponseFormat
 
@@ -31,7 +31,7 @@ func ConstructResponse(status string, data map[string]interface{}) (int, Respons
 		response.Data = data
 
 	case business.SuccessDeleted:
-		httpStatus = http.StatusCreated
+		httpStatus = http.StatusOK
 		response.Success = true
 		response.Message = business.SuccessDeleted
 		response.Data = data

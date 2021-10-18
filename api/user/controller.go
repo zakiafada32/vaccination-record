@@ -46,9 +46,7 @@ func (uc *UserController) FindAll(c echo.Context) error {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
 
-	return c.JSON(utils.ConstructResponse(message.Success, echo.Map{
-		"users": users,
-	}))
+	return c.JSON(utils.ConstructResponse(message.Success, users))
 }
 
 func (uc *UserController) CheckStatus(c echo.Context) error {
@@ -63,7 +61,5 @@ func (uc *UserController) CheckStatus(c echo.Context) error {
 		return c.JSON(utils.ConstructResponse(err.Error(), echo.Map{}))
 	}
 
-	return c.JSON(utils.ConstructResponse(message.Success, echo.Map{
-		"status": userStatus,
-	}))
+	return c.JSON(utils.ConstructResponse(message.Success, userStatus))
 }

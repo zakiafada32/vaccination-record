@@ -61,7 +61,7 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\r\n    \"success\": true,\r\n    \"message\": \"sucess created\",\r\n    \"data\": {\r\n        \"id\": \"3aa0c66f-d811-4d30-a8bd-675866b6461b\"\r\n    }\r\n}"
+					"body": "{\r\n    \"success\": true,\r\n    \"message\": \"sucess created\",\r\n    \"data\": {\r\n        \"id\": \"2eb78bd8-f303-4208-80b6-200718949d70\"\r\n    }\r\n}"
 				}
 			]
 		},
@@ -116,7 +116,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"description\": \"Sinovac Dosis Ketiga\",\r\n  \"vaccinated_date\": \"2021-12-02\",\r\n  \"hospital\": {\r\n    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\r\n    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\r\n  },\r\n  \"doctor\": {\r\n    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\r\n    \"str_number\": \"1211111012110031702\"\r\n  }\r\n}"
+					"raw": "{\r\n  \"description\": \"Sinovac Dosis Ketiga\",\r\n  \"vaccinated_date\": \"2021-03-18\",\r\n  \"hospital\": {\r\n    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\r\n    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\r\n  },\r\n  \"doctor\": {\r\n    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\r\n    \"str_number\": \"1211111012110031702\"\r\n  }\r\n}"
 				},
 				"url": {
 					"raw": "{{host}}/vaccine-user/:userId/add-history",
@@ -131,7 +131,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "a77e20a3-bca1-4a1c-b79d-045f9a0bd96a"
+							"value": "2eb78bd8-f303-4208-80b6-200718949d70"
 						}
 					]
 				}
@@ -144,13 +144,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"name": "Content-Type",
 								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"description\": \"Sinovac Dosis Ketiga\",\r\n  \"vaccinated_date\": \"2021-12-02\",\r\n  \"hospital\": {\r\n    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\r\n    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\r\n  },\r\n  \"doctor\": {\r\n    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\r\n    \"str_number\": \"1211111012110031702\"\r\n  }\r\n}"
+							"raw": "{\r\n  \"description\": \"Sinovac Dosis Ketiga\",\r\n  \"vaccinated_date\": \"2021-03-18\",\r\n  \"hospital\": {\r\n    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\r\n    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\r\n  },\r\n  \"doctor\": {\r\n    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\r\n    \"str_number\": \"1211111012110031702\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/vaccine-user/:userId/add-history",
@@ -165,7 +171,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "a77e20a3-bca1-4a1c-b79d-045f9a0bd96a"
+									"value": "2eb78bd8-f303-4208-80b6-200718949d70"
 								}
 							]
 						}
@@ -173,7 +179,7 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"success\": true,\n    \"message\": \"sucess created\",\n    \"data\": {\n        \"vaccines\": [\n            {\n                \"history_unique_id\": 9,\n                \"description\": \"Sinovac Dosis Ketiga\",\n                \"vaccinated_date\": \"2021-12-02\",\n                \"hospital\": {\n                    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n                },\n                \"doctor\": {\n                    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                    \"str_number\": \"1211111012110031702\"\n                }\n            },\n            {\n                \"history_unique_id\": 8,\n                \"description\": \"Sinovac Dosis Kedua\",\n                \"vaccinated_date\": \"2021-02-02\",\n                \"hospital\": {\n                    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n                },\n                \"doctor\": {\n                    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                    \"str_number\": \"1211111012110031702\"\n                }\n            },\n            {\n                \"history_unique_id\": 7,\n                \"description\": \"Sinovac Dosis Pertama\",\n                \"vaccinated_date\": \"2021-01-02\",\n                \"hospital\": {\n                    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n                },\n                \"doctor\": {\n                    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                    \"str_number\": \"1211111012110031702\"\n                }\n            }\n        ]\n    }\n}"
+					"body": "{\n    \"success\": true,\n    \"message\": \"sucess created\",\n    \"data\": [\n        {\n            \"history_unique_id\": 3,\n            \"description\": \"Sinovac Dosis Ketiga\",\n            \"vaccinated_date\": \"2021-03-18\",\n            \"hospital\": {\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            },\n            \"doctor\": {\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        },\n        {\n            \"history_unique_id\": 2,\n            \"description\": \"Sinovac Dosis Kedua\",\n            \"vaccinated_date\": \"2021-02-18\",\n            \"hospital\": {\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            },\n            \"doctor\": {\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        },\n        {\n            \"history_unique_id\": 1,\n            \"description\": \"Sinovac Dosis Pertama\",\n            \"vaccinated_date\": \"2021-01-18\",\n            \"hospital\": {\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            },\n            \"doctor\": {\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        }\n    ]\n}"
 				}
 			]
 		},
@@ -196,11 +202,11 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "a77e20a3-bca1-4a1c-b79d-045f9a0bd96a"
+							"value": "2eb78bd8-f303-4208-80b6-200718949d70"
 						},
 						{
 							"key": "vaccineId",
-							"value": "9"
+							"value": "3"
 						}
 					]
 				}
@@ -225,11 +231,11 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "a77e20a3-bca1-4a1c-b79d-045f9a0bd96a"
+									"value": "2eb78bd8-f303-4208-80b6-200718949d70"
 								},
 								{
 									"key": "vaccineId",
-									"value": "9"
+									"value": "3"
 								}
 							]
 						}
@@ -237,7 +243,7 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"success\": true,\n    \"message\": \"sucess deleted\",\n    \"data\": {\n        \"vaccines\": [\n            {\n                \"history_unique_id\": 8,\n                \"description\": \"Sinovac Dosis Kedua\",\n                \"vaccinated_date\": \"2021-02-02\",\n                \"hospital\": {\n                    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n                },\n                \"doctor\": {\n                    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                    \"str_number\": \"1211111012110031702\"\n                }\n            },\n            {\n                \"history_unique_id\": 7,\n                \"description\": \"Sinovac Dosis Pertama\",\n                \"vaccinated_date\": \"2021-01-02\",\n                \"hospital\": {\n                    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n                },\n                \"doctor\": {\n                    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                    \"str_number\": \"1211111012110031702\"\n                }\n            }\n        ]\n    }\n}"
+					"body": "{\n    \"success\": true,\n    \"message\": \"sucess deleted\",\n    \"data\": [\n        {\n            \"history_unique_id\": 2,\n            \"description\": \"Sinovac Dosis Kedua\",\n            \"vaccinated_date\": \"2021-02-18\",\n            \"hospital\": {\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            },\n            \"doctor\": {\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        },\n        {\n            \"history_unique_id\": 1,\n            \"description\": \"Sinovac Dosis Pertama\",\n            \"vaccinated_date\": \"2021-01-18\",\n            \"hospital\": {\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            },\n            \"doctor\": {\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        }\n    ]\n}"
 				}
 			]
 		},
@@ -254,7 +260,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"identity_card_number\": \"3322113112990002\",\r\n    \"name\": \"Agung Prakasa\",\r\n    \"password\": \"Mandibu9911!\"\r\n}"
+					"raw": "{\r\n    \"identity_card_number\": \"3322113112990001\",\r\n    \"name\": \"Budiman Prakasa\",\r\n    \"password\": \"Mandibu9911!\"\r\n}"
 				},
 				"url": {
 					"raw": "{{host}}/vaccine/check-status",
@@ -275,13 +281,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"name": "Content-Type",
 								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identity_card_number\": \"3322113112990002\",\r\n    \"name\": \"Agung Prakasa\",\r\n    \"password\": \"Mandibu9911!\"\r\n}"
+							"raw": "{\r\n    \"identity_card_number\": \"3322113112990001\",\r\n    \"name\": \"Budiman Prakasa\",\r\n    \"password\": \"Mandibu9911!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/vaccine/check-status",
@@ -297,7 +309,7 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"success\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"status\": {\n            \"user_unique_id\": \"a77e20a3-bca1-4a1c-b79d-045f9a0bd96a\",\n            \"identity_card_number\": \"3322113112990002\",\n            \"name\": \"Agung Prakasa\",\n            \"vaccine\": {\n                \"history_unique_id\": 8,\n                \"description\": \"Sinovac Dosis Kedua\",\n                \"vaccinated_date\": \"2021-02-02\",\n                \"hospital\": {\n                    \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                    \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n                },\n                \"doctor\": {\n                    \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                    \"str_number\": \"1211111012110031702\"\n                }\n            }\n        }\n    }\n}"
+					"body": "{\n    \"success\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"user_unique_id\": \"2eb78bd8-f303-4208-80b6-200718949d70\",\n        \"identity_card_number\": \"3322113112990001\",\n        \"name\": \"Budiman Prakasa\",\n        \"vaccine\": {\n            \"history_unique_id\": 2,\n            \"description\": \"Sinovac Dosis Kedua\",\n            \"vaccinated_date\": \"2021-02-18\",\n            \"hospital\": {\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            },\n            \"doctor\": {\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        }\n    }\n}"
 				}
 			]
 		},
@@ -335,7 +347,7 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"success\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"hospitals\": [\n            {\n                \"id\": 2,\n                \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n                \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n            }\n        ]\n    }\n}"
+					"body": "{\n    \"success\": true,\n    \"message\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"KLINIK POLRES JAKARTA UTARA\",\n            \"address\": \"Jl. Yos Sudarso No.1, Jakarta Utara, DKI Jakarta\"\n        }\n    ]\n}"
 				}
 			]
 		},
@@ -373,7 +385,7 @@
 					"_postman_previewlanguage": "json",
 					"header": null,
 					"cookie": [],
-					"body": "{\n    \"success\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"doctors\": [\n            {\n                \"id\": 2,\n                \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n                \"str_number\": \"1211111012110031702\"\n            }\n        ]\n    }\n}"
+					"body": "{\n    \"success\": true,\n    \"message\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Dr. Agus Marhadi, Sp.OT, Ph.D.\",\n            \"str_number\": \"1211111012110031702\"\n        }\n    ]\n}"
 				}
 			]
 		}
