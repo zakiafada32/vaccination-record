@@ -31,7 +31,7 @@ func init() {
 
 func main() {
 	db := config.ConnectMySQL()
-	repository.Migrate(db)
+	// repository.Migrate(db)
 
 	userRepository := repository.NewUserRepository(db)
 	userService := userService.NewUserService(userRepository)

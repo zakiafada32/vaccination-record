@@ -30,6 +30,12 @@ func ConstructResponse(status string, data map[string]interface{}) (int, Respons
 		response.Message = business.SuccessCreated
 		response.Data = data
 
+	case business.SuccessDeleted:
+		httpStatus = http.StatusCreated
+		response.Success = true
+		response.Message = business.SuccessDeleted
+		response.Data = data
+
 	// error response
 	case business.BadRequest:
 		httpStatus = http.StatusBadRequest
@@ -65,6 +71,12 @@ func ConstructResponse(status string, data map[string]interface{}) (int, Respons
 		httpStatus = http.StatusBadRequest
 		response.Success = false
 		response.Message = business.IdentityCardNumberAlreadyExist
+		response.Data = map[string]interface{}{}
+
+	case business.PasswordIncorrect:
+		httpStatus = http.StatusNotFound
+		response.Success = false
+		response.Message = business.PasswordIncorrect
 		response.Data = map[string]interface{}{}
 	}
 

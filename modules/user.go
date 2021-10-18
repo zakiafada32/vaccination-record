@@ -105,6 +105,21 @@ func (repo *userRepository) FindLatestVaccineHistoryOfUser(userId string) (vacci
 	return vaccineData, nil
 }
 
+func (repo *userRepository) FindVaccinesByUserId(userId string) ([]vaccineBusiness.Vaccine, error) {
+	var vaccines []Vaccine
+	err := repo.db.Order("vaccinated_date desc").Preload(clause.Associations).Where("user_id = ?", userId).Find(&vaccines).Error
+	if err != nil {
+		return []vaccineBusiness.Vaccine{}, err
+	}
+
+	vaccinesData := make([]vaccineBusiness.Vaccine, len(vaccines))
+	for i, vaccine := range vaccines {
+		vaccinesData[i] = convertToVaccineBusiness(vaccine)
+	}
+
+	return vaccinesData, nil
+}
+
 func convertToUserModel(data userBusiness.User) User {
 	return User{
 		ID:                 data.ID,

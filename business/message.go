@@ -4,6 +4,7 @@ package business
 var (
 	Success        = "success"
 	SuccessCreated = "sucess created"
+	SuccessDeleted = "sucess deleted"
 )
 
 // err status code

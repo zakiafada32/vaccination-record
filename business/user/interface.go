@@ -16,4 +16,5 @@ type Repository interface {
 	FindAllUser() ([]User, error)
 	RegisterUser(user User) error
 	FindLatestVaccineHistoryOfUser(userId string) (vaccine.Vaccine, error)
+	FindVaccinesByUserId(userId string) ([]vaccine.Vaccine, error)
 }

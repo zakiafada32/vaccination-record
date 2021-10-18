@@ -24,8 +24,8 @@ type userResponse struct {
 }
 
 type checkStatus struct {
-	ID                 string `json:"user_unique_id"`
-	IdentityCardNumber string `json:"identity_card_number"`
-	Name               string `json:"name"`
-	Vaccine            vaccine.VaccineResponse
+	ID                 string                  `json:"user_unique_id"`
+	IdentityCardNumber string                  `json:"identity_card_number"`
+	Name               string                  `json:"name"`
+	Vaccine            vaccine.VaccineResponse `json:"vaccine"`
 }

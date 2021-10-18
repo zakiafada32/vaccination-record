@@ -97,20 +97,35 @@ func (s *service) CheckStatus(cardId, name, password string) (checkStatus, error
 	err = utils.CompareHash(user.Password, password)
 	if err != nil {
 		log.Println(err)
-		return checkStatus{}, errors.New(business.PasswordIncorrect)
+		return checkStatus{}, errors.New(business.NotFound)
 	}
 
-	vaccineData, err := s.repository.FindLatestVaccineHistoryOfUser(user.ID)
+	// vaccineData, err := s.repository.FindLatestVaccineHistoryOfUser(user.ID)
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return checkStatus{}, errors.New(business.InternalServerError)
+	// }
+
+	vaccineData, err := s.repository.FindVaccinesByUserId(user.ID)
 	if err != nil {
 		log.Println(err)
 		return checkStatus{}, errors.New(business.InternalServerError)
 	}
 
-	userStatus := checkStatus{
-		ID:                 user.ID,
-		IdentityCardNumber: user.IdentityCardNumber,
-		Name:               user.Name,
-		Vaccine:            vaccine.ConvertToVaccineResponse(vaccineData),
+	var userStatus checkStatus
+	if len(vaccineData) == 0 {
+		userStatus = checkStatus{
+			ID:                 user.ID,
+			IdentityCardNumber: user.IdentityCardNumber,
+			Name:               user.Name,
+		}
+	} else {
+		userStatus = checkStatus{
+			ID:                 user.ID,
+			IdentityCardNumber: user.IdentityCardNumber,
+			Name:               user.Name,
+			Vaccine:            vaccine.ConvertToVaccineResponse(vaccineData[0]),
+		}
 	}
 
 	return userStatus, nil

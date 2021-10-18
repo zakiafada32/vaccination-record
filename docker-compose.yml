@@ -1,6 +1,26 @@
 version: '3.8'
 
 services:
+  vaccination-service:
+    depends_on:
+      - vaccination-mysql
+    build:
+      context: .
+    container_name: vaccination-service
+    hostname: vaccination-service
+    networks:
+      - mynet
+    ports:
+      - 7000:7000
+    environment:
+      - SQL_USER=${SQL_USER}
+      - SQL_PASSWORD=${SQL_PASSWORD}
+      - SQL_DBNAME=${SQL_DBNAME}
+      - SQL_HOST=vaccination-mysql
+    deploy:
+      restart_policy:
+        condition: on-failure
+
   vaccination-mysql:
     image: mysql
     container_name: vaccination-mysql

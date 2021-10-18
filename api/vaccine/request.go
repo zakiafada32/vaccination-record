@@ -7,8 +7,8 @@ import (
 )
 
 type addHistoryRequestBody struct {
-	Description    string `json:"description"`
-	VaccinatedDate string `json:"vaccinated_date"`
+	Description    string `json:"description" validate:"required"`
+	VaccinatedDate string `json:"vaccinated_date" validate:"required,datetime=2006-01-02"`
 	Hospital       struct {
 		Name    string `json:"name" validate:"required"`
 		Address string `json:"address" validate:"required"`

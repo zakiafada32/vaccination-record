@@ -27,28 +27,33 @@ func (s *service) AddHistory(userId string, vaccine Vaccine) ([]VaccineResponse,
 
 	err = s.repository.FindUserById(userId)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.NotFound)
 	}
 
 	doctorId, err := s.repository.FindOrAddDoctor(vaccine.Doctor)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 	vaccine.Doctor.ID = doctorId
 
 	hospitalId, err := s.repository.FindOrAddHospital(vaccine.Hospital)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 	vaccine.Hospital.ID = hospitalId
 
 	err = s.repository.AddHistoryVaccine(userId, vaccine)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 
 	vaccines, err := s.repository.FindVaccinesByUserId(userId)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 
@@ -63,16 +68,19 @@ func (s *service) AddHistory(userId string, vaccine Vaccine) ([]VaccineResponse,
 func (s *service) DeleteHistory(userId string, vaccineId uint32) ([]VaccineResponse, error) {
 	err := s.repository.FindVaccinesByVaccineIdAndUserId(userId, vaccineId)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.NotFound)
 	}
 
 	err = s.repository.DeleteVaccineByVaccineIdAndUserId(userId, vaccineId)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 
 	vaccines, err := s.repository.FindVaccinesByUserId(userId)
 	if err != nil {
+		log.Println(err)
 		return []VaccineResponse{}, errors.New(business.InternalServerError)
 	}
 

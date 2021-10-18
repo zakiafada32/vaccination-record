@@ -25,6 +25,6 @@ func (dc *HospitalController) FindAll(c echo.Context) error {
 	}
 
 	return c.JSON(utils.ConstructResponse(message.Success, echo.Map{
-		"hospital": hospitals,
+		"hospitals": hospitals,
 	}))
 }

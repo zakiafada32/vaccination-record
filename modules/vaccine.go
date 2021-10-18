@@ -88,7 +88,7 @@ func (repo *vaccineRepository) FindVaccinesByVaccineIdAndUserId(userId string, v
 }
 
 func (repo *vaccineRepository) DeleteVaccineByVaccineIdAndUserId(userId string, vaccineId uint32) error {
-	err := repo.db.Where("user_id = ?", userId).Delete(&User{}, vaccineId).Error
+	err := repo.db.Where("user_id = ?", userId).Delete(&Vaccine{}, vaccineId).Error
 	if err != nil {
 		return err
 	}
@@ -98,7 +98,7 @@ func (repo *vaccineRepository) DeleteVaccineByVaccineIdAndUserId(userId string, 
 
 func (repo *vaccineRepository) FindUserById(userId string) error {
 	var userData User
-	err := repo.db.Where("id = ?", userId).Find(&userData).Error
+	err := repo.db.Where("id = ?", userId).First(&userData).Error
 	if err != nil {
 		return err
 	}
